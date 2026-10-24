@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>E-Portofolio Praktik Pembelajaran Terbimbing | Muhammad Farhan Said</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+    --ink: #14213d;             /* navy */
+    --ink-soft: #26364f;
+    --ink-muted: #667085;
+    --cream: #f7f3e8;           /* cream */
+    --cream-dark: #e2e8f0;      /* silver */
+    --warm-white: #ffffff;      /* white */
+    --gold: #c9a227;            /* gold */
+    --gold-light: #e7c96e;
+    --gold-pale: #f5e9bf;
+    --teal: #14213d;            /* old accent token now maps to navy */
+    --teal-light: #29466f;
+    --teal-pale: #e8f3f8;       /* light blue */
+    --red-accent: #a9d6e5;
+    --dark-tosca: #14213d;
+    --border: rgba(20, 33, 61, 0.18);
+    --shadow-soft: 0 4px 24px rgba(20, 33, 61, 0.09);
+    --shadow-card: 0 2px 12px rgba(20, 33, 61, 0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    transition: box-shadow 0.3s;
+  }
+
+  nav.scrolled { box-shadow: var(--shadow-soft); }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 60px;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--teal); border-bottom: 2px solid var(--teal); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink-soft); border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* ===== HERO ===== */
+  #beranda {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(20, 33, 61, 0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201, 162, 39, 0.08) 0%, transparent 60%);
+  }
+
+  .hero-decoration {
+    position: absolute;
+    top: 80px; right: 0;
+    width: 45%;
+    height: calc(100% - 80px);
+    background: var(--cream-dark);
+    clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+    z-index: 0;
+  }
+
+  .hero-deco-pattern {
+    position: absolute;
+    top: 80px; right: 0;
+    width: 45%;
+    height: calc(100% - 80px);
+    z-index: 1;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--gold) 0px, var(--gold) 1px,
+      transparent 1px, transparent 12px
+    );
+    clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .hero-content {
+    padding: 4rem 3rem 4rem 5rem;
+    position: relative;
+    z-index: 2;
+    animation: fadeInLeft 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    margin: 1.25rem 0 2rem;
+    font-weight: 300;
+    max-width: 420px;
+    line-height: 1.8;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    background: var(--gold-pale);
+    color: var(--ink-soft);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--teal);
+    color: white;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .hero-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 4rem 4rem 2rem;
+    animation: fadeInRight 0.9s ease 0.2s both;
+  }
+
+  .profile-frame {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .profile-photo-placeholder {
+    width: 280px;
+    height: 340px;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    box-shadow: 12px 12px 0 var(--gold-pale), 12px 12px 0 1px var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  }
+
+  .profile-photo-placeholder svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+
+  .profile-photo-placeholder p {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .profile-card-info {
+    position: static;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 0.9rem 1.1rem;
+    border-radius: 4px;
+    box-shadow: var(--shadow-card);
+    min-width: 180px;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+
+  .profile-card-info .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .profile-card-info .role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--teal);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .stat-badge {
+    position: static;
+    background: var(--gold);
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  .profile-photo-drive {
+    width: 280px;
+    height: 340px;
+    background: linear-gradient(135deg, var(--warm-white) 0%, #fffdf7 100%);
+    border-radius: 4px;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    box-shadow: 12px 12px 0 var(--gold-pale), 12px 12px 0 1px var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-photo-drive::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+    pointer-events: none;
+  }
+
+  .profile-photo-link {
+    flex: 1;
+    display: block;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+  }
+
+  .profile-photo-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(20, 33, 61, 0.12), rgba(201, 162, 39, 0.10)), var(--cream-dark);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+  }
+
+  .profile-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .profile-photo-caption {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+  }
+
+  .profile-photo-drive .media-link:hover .profile-photo-frame {
+    transform: translateY(-1px);
+  }
+
+  /* ===== NAV INDEX BAR ===== */
+  .nav-index {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1.2rem 5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav-index-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-right: 0.5rem;
+  }
+
+  .nav-index a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(247, 243, 232, 0.6);
+    text-decoration: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    transition: 0.2s;
+    counter-increment: nav-counter;
+  }
+
+  .nav-index a::before {
+    content: attr(data-num) '. ';
+    color: var(--gold);
+    font-weight: 300;
+  }
+
+  .nav-index a:hover { color: var(--cream); background: rgba(255,255,255,0.05); }
+
+  /* ===== SECTION BASE ===== */
+  section {
+    padding: 5rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    max-width: 100%;
+    padding: 5rem 0;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 650px;
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== PROFIL ===== */
+  #profil { background: var(--warm-white); padding: 5rem 0; max-width: 100%; }
+
+  .profil-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .profil-sidebar {
+    position: sticky;
+    top: 80px;
+  }
+
+  .profil-detail-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .profil-detail-card h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profil-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.35rem 0.1rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+    align-items: baseline;
+  }
+
+  .profil-item dt {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    padding-top: 0.1rem;
+    white-space: nowrap;
+    width: 80px;
+  }
+
+  .profil-item dd {
+    color: var(--ink-soft);
+    font-weight: 400;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .contact-item svg { color: var(--teal); flex-shrink: 0; }
+
+  .profil-body p {
+    margin-bottom: 1.25rem;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    font-size: 0.97rem;
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.5rem;
+    background: var(--gold-pale);
+    border-radius: 0 4px 4px 0;
+    margin: 2rem 0;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote-block cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+
+  .narasi-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .narasi-photo {
+    margin: 0;
+  }
+
+  .narasi-photo-frame {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background:
+      linear-gradient(135deg, rgba(20, 33, 61, 0.12), rgba(201, 162, 39, 0.10)),
+      var(--warm-white);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .narasi-photo-placeholder {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--ink-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .narasi-photo-placeholder svg {
+    display: block;
+    margin: 0 auto 0.75rem;
+    width: 34px;
+    height: 34px;
+    color: var(--teal);
+    opacity: 0.9;
+  }
+
+  .narasi-photo figcaption,
+  .media-caption-link {
+    margin-top: 0.65rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .media-caption-link {
+    display: block;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .media-caption-link:hover {
+    color: var(--teal);
+    transform: translateY(-1px);
+  }
+
+  /* ===== ARTEFAK TABS & TWO-TIER FILTER ===== */
+  #artefak { background: var(--cream); }
+
+  .cycle-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cycle-tab {
+    padding: 0.6rem 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .cycle-tab:hover { color: var(--teal); }
+  .cycle-tab.active {
+    color: white;
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  .artefak-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .artefak-tabs::-webkit-scrollbar { display: none; }
+
+  .artefak-tab {
+    padding: 0.75rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: 0.2s;
+  }
+  
+  .artefak-tab:hover { color: var(--dark-tosca); }
+  .artefak-tab.active {
+    color: white;
+    background: var(--dark-tosca);
+    border-color: var(--dark-tosca);
+  }
+
+  .artefak-panel { display: none; }
+  .artefak-panel.active { display: block; }
+
+  .artefak-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .artefak-card-header {
+    background: linear-gradient(135deg, var(--teal) 0%, #22395d 100%);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .artefak-card-header .artefak-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .artefak-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  .artefak-card-header p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+
+  .artefak-card-body {
+    padding: 2rem;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .analysis-item {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+    border-left: 3px solid var(--teal);
+  }
+
+  .analysis-item.b { border-left-color: var(--gold); }
+
+  .analysis-item h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .analysis-item p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+
+  .analysis-full {
+    grid-column: 1 / -1;
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+    border-left: 3px solid var(--gold);
+  }
+
+  .analysis-full h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .analysis-full p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+
+  .placeholder-box {
+    border: 2px dashed var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    text-align: center;
+    background: var(--cream-dark);
+    margin-top: 1rem;
+  }
+
+  .placeholder-box p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== LAMPIRAN ===== */
+  #lampiran { background: var(--warm-white); }
+
+  .lampiran-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .lampiran-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .lampiran-card-header {
+    background: var(--ink);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lampiran-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .lampiran-card-header h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .lampiran-card-body {
+    padding: 1.5rem;
+  }
+
+  .lampiran-card-body p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .siklus-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  .siklus-badge {
+    background: var(--teal-pale);
+    color: var(--teal);
+    border: 1px solid rgba(20,33,61,0.2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+
+
+  /* ===== DOKUMENTASI PEMBELAJARAN ===== */
+  .documentation-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .documentation-photo {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--cream);
+    box-shadow: var(--shadow-card);
+  }
+
+  .documentation-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    background: var(--cream-dark);
+  }
+
+  .documentation-photo figcaption {
+    padding: 0.8rem 0.9rem 0.95rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .documentation-note {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+  }
+
+  .lampiran-cycle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .lampiran-cycle-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  .lampiran-cycle-header {
+    background: linear-gradient(135deg, var(--ink) 0%, #26364f 100%);
+    color: white;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .lampiran-cycle-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .lampiran-cycle-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+
+  .lampiran-cycle-body {
+    padding: 1rem 1.1rem 1.15rem;
+  }
+
+  .lampiran-cycle-body p {
+    margin-bottom: 0.85rem;
+  }
+
+  .lampiran-cycle-body .placeholder-box {
+    margin-top: 0.9rem;
+  }
+
+
+  .media-source-hint {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+  }
+
+  .media-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    border-radius: 999px;
+    background: rgba(245, 236, 215, 0.55);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .media-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .media-link:focus-visible {
+    outline: 2px solid var(--teal-light);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+
+  .narasi-gallery .narasi-photo-frame {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .narasi-gallery .media-link:hover .narasi-photo-frame {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26,22,18,0.1);
+  }
+
+  .documentation-photo img {
+    transition: transform 0.2s ease;
+  }
+
+  .documentation-photo .media-link:hover img {
+    transform: scale(1.01);
+  }
+
+  .pdf-block {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background: var(--warm-white);
+  }
+
+  .pdf-block iframe {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: 0;
+    background: white;
+  }
+
+  .pdf-block-fallback {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    background:
+      radial-gradient(circle at top, rgba(20,33,61,0.08), transparent 45%),
+      linear-gradient(135deg, rgba(245,236,215,0.75), rgba(253,250,246,0.95));
+    color: var(--ink-soft);
+  }
+
+  .pdf-block-fallback svg {
+    width: 54px;
+    height: 54px;
+    color: var(--teal);
+    margin-bottom: 0.85rem;
+  }
+
+  .pdf-block-fallback h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+  }
+
+  .pdf-block-fallback p {
+    max-width: 340px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 0.85rem;
+  }
+
+  .pdf-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.85rem;
+  }
+
+  .pdf-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 4px;
+    background: var(--teal);
+    color: white;
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .pdf-button:hover {
+    background: var(--teal-light);
+    transform: translateY(-1px);
+  }
+
+  .pdf-button.secondary {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid rgba(20,33,61,0.25);
+  }
+
+  .pdf-button.secondary:hover {
+    background: rgba(20,33,61,0.06);
+  }
+
+
+  /* ===== GALERI PPL MANDIRI ===== */
+  #galeri-pplt {
+    background: var(--cream);
+  }
+
+  .pplt-gallery-shell {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+
+  .pplt-main-view {
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(20, 33, 61, 0.08), rgba(201, 162, 39, 0.08));
+    border: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .pplt-main-view a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pplt-main-view img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  .pplt-main-view:hover img {
+    transform: scale(1.01);
+  }
+
+  .pplt-main-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.9rem 0 1.1rem;
+    flex-wrap: wrap;
+  }
+
+  .pplt-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .pplt-main-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .pplt-thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .pplt-thumb {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--cream);
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .pplt-thumb:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(26, 22, 18, 0.1);
+  }
+
+  .pplt-thumb.active {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 2px rgba(20,33,61,0.12), var(--shadow-card);
+  }
+
+  .pplt-thumb img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background: var(--cream-dark);
+  }
+
+  .pplt-thumb span {
+    display: block;
+    padding: 0.55rem 0.55rem 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .pplt-gallery-note {
+    margin-top: 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+  }
+
+  .pplt-gallery-note strong {
+    color: var(--teal);
+    font-weight: 400;
+  }
+  /* ===== REFLEKSI ===== */
+  #refleksi { background: var(--ink); color: var(--cream); }
+
+  #refleksi .section-title { color: var(--cream); }
+  #refleksi .section-label { color: var(--gold); }
+  #refleksi .section-label::after { background: var(--gold); }
+  #refleksi .section-lead { color: rgba(247,243,232,0.7); }
+
+  .refleksi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .refleksi-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,162,39,0.2);
+    border-radius: 6px;
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .refleksi-card:hover { background: rgba(255,255,255,0.07); }
+
+  .refleksi-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+  }
+
+  .refleksi-card p {
+    font-size: 0.88rem;
+    color: rgba(247,243,232,0.75);
+    line-height: 1.8;
+  }
+
+  .refleksi-card ul {
+    list-style: none;
+    margin-top: 0.5rem;
+  }
+
+  .refleksi-card ul li {
+    font-size: 0.85rem;
+    color: rgba(247,243,232,0.75);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .refleksi-card ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ===== FILOSOFI ===== */
+  #filosofi { background: var(--warm-white); }
+
+  .filosofi-hero {
+    background: linear-gradient(135deg, var(--gold) 0%, #b08b2e 100%);
+    border-radius: 6px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .filosofi-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px,
+      transparent 1px, transparent 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px,
+      transparent 1px, transparent 40px
+    );
+  }
+
+  .filosofi-hero h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-style: italic;
+    color: white;
+    line-height: 1.5;
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .filosofi-hero p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .filosofi-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pillar {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar::before {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -0.5rem;
+    right: 0.75rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: rgba(201,162,39,0.08);
+    line-height: 1;
+  }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    position: relative;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: rgba(247, 243, 232, 0.5);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { animation: fadeInUp 0.6s ease both; }
+
+  /* ===== DIVIDER ===== */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .ornament-divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .ornament-divider span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+
+  /* ===== KEGIATAN NON-MENGAJAR ===== */
+  .nonmengajar-tabs {
+    display: none;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nonmengajar-tabs::-webkit-scrollbar { display: none; }
+  .nonmengajar-panel { display: none; }
+  .nonmengajar-panel.active { display: block; }
+  .nonmengajar-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0.5rem 0 1.5rem;
+  }
+  .nonmengajar-photo-slot {
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--warm-white);
+    box-shadow: var(--shadow-card);
+  }
+  .nonmengajar-photo-placeholder {
+    min-height: 210px;
+    aspect-ratio: 4 / 3;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    text-align: center;
+    color: var(--ink-muted);
+    background: linear-gradient(135deg, rgba(169,214,229,0.36), rgba(245,233,191,0.35)), var(--cream-dark);
+  }
+  .nonmengajar-photo-link { display: block; width: 100%; }
+  .nonmengajar-photo-slot img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--cream-dark);
+  }
+  .nonmengajar-photo-slot img:hover { opacity: 0.97; }
+  .nonmengajar-photo-placeholder svg { width: 38px; height: 38px; color: var(--teal-light); }
+  .nonmengajar-photo-placeholder strong {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .nonmengajar-photo-placeholder span { font-size: 0.8rem; line-height: 1.5; }
+  .nonmengajar-description {
+    padding: 1.1rem 1.25rem; border-left: 3px solid var(--gold);
+    border-radius: 0 5px 5px 0; background: var(--cream);
+  }
+  .nonmengajar-description h4 {
+    font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+  }
+  .nonmengajar-description p { color: var(--ink-soft); font-size: 0.9rem; }
+  @media (max-width: 600px) {
+    .nonmengajar-photo-grid { grid-template-columns: 1fr; }
+    .nonmengajar-photo-placeholder { min-height: 180px; }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    #beranda { grid-template-columns: 1fr; min-height: auto; padding-top: 80px; }
+    .hero-decoration, .hero-deco-pattern { display: none; }
+    .hero-content { padding: 3rem 2rem 2rem; }
+    .hero-visual { padding: 2rem; justify-content: flex-start; }
+    section { padding: 3rem 1.5rem; }
+    .section-inner, .profil-grid { padding: 0 1.5rem; }
+    .profil-grid { grid-template-columns: 1fr; }
+    .profil-sidebar { position: static; }
+    .analysis-grid { grid-template-columns: 1fr; }
+    .refleksi-grid { grid-template-columns: 1fr; }
+    .filosofi-pillars { grid-template-columns: 1fr; }
+    .lampiran-grid { grid-template-columns: 1fr; }
+    .langkah-grid { grid-template-columns: 1fr 1fr; }
+    nav .nav-links { display: none; }
+    nav .nav-links.open { 
+      display: flex; flex-direction: column;
+      position: absolute; top: 60px; left: 0; right: 0;
+      background: var(--cream);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem 0;
+    }
+    .nav-links a { line-height: 1; padding: 0.75rem 2rem; }
+    .hamburger { display: flex; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem; }
+    .nav-index { padding: 1rem 1.5rem; }
+    .section-full { padding: 3rem 0; }
+    .cycle-tabs { flex-wrap: wrap; }
+    .narasi-gallery { grid-template-columns: 1fr; }
+    .pplt-thumb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pplt-main-meta { align-items: flex-start; }
+  }
+
+  @media (max-width: 600px) {
+    .pplt-thumb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pplt-main-meta { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  }
+
+  @media (max-width: 420px) {
+    .pplt-thumb-grid { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+<nav id="navbar">
+<a class="nav-brand" href="#beranda">E-Portofolio Praktik Pembelajaran Terbimbing</a>
+<ul class="nav-links" id="navLinks">
+<li><a data-section="beranda" href="#beranda">Beranda</a></li>
+<li><a data-section="profil" href="#profil">Profil</a></li>
+<li><a data-section="artefak" href="#artefak">Kegiatan</a></li>
+</ul>
+<div class="hamburger" id="hamburger" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+</nav>
+<section id="beranda" style="padding:0; max-width:100%;">
+<div class="hero-bg"></div>
+<div class="hero-decoration"></div>
+<div class="hero-deco-pattern"></div>
+<div class="hero-content">
+<div class="hero-eyebrow">E-Portofolio Praktik Pembelajaran Terbimbing</div>
+<h1 class="hero-title">
+      Guru Bermakna:<br/>
+      Dari <em>Teori</em> ke <em>Praktik</em>
+</h1>
+<p class="hero-subtitle">Selamat datang di ruang dokumentasi perjalanan profesional saya sebagai calon guru. E-portofolio ini memuat proses belajar, praktik mengajar, materi pembelajaran, dan refleksi selama pelaksanaan PPL Mandiri dalam program Pendidikan Profesi Guru (PPG) Calon Guru.</p>
+<div class="hero-tags">
+<span class="tag">PPG Calon Guru</span>
+<span class="tag">PENDIDIKAN PROFESI GURU</span>
+<span class="tag">UNIVERSITAS HALU OLEO</span>
+<span class="tag">PPL Mandiri</span>
+<span class="tag">MATEMATIKA</span>
+<span class="tag">SMAN 4 KENDARI</span>
+</div>
+<a class="hero-cta" href="#profil">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      Lihat Portofolio
+    </a>
+</div>
+<div class="hero-visual">
+<div class="profile-frame">
+<div class="stat-badge">PPG Calon Guru</div>
+<div class="profile-photo-drive">
+<a aria-label="Buka foto profil di Google Drive" class="media-link profile-photo-link" href="https://drive.google.com/file/d/1iMHakqL9XhFmMKo8rJ51rYnGBfp94Z5K/view?usp=drivesdk" rel="noopener" target="_blank">
+<div class="profile-photo-frame">
+<img alt="Foto Profil Muhammad Farhan Said" src="https://drive.google.com/thumbnail?id=1iMHakqL9XhFmMKo8rJ51rYnGBfp94Z5K&amp;sz=w1200"/>
+</div>
+</a>
+<a class="media-caption-link profile-photo-caption" href="https://drive.google.com/file/d/1iMHakqL9XhFmMKo8rJ51rYnGBfp94Z5K/view?usp=drivesdk" rel="noopener" target="_blank">Foto Profil</a>
+</div>
+<div class="profile-card-info">
+<div class="name">Muhammad Farhan Said, S.Mat.</div>
+<div class="role">Mahasiswa · PENDIDIKAN PROFESI GURU</div>
+</div>
+</div>
+</div>
+</section>
+<div class="section-full" id="profil">
+<div class="profil-grid">
+<div class="profil-sidebar">
+<div class="section-label">Siapa Saya</div>
+<h2 class="section-title" style="font-size:1.8rem; margin-bottom:1.5rem;">Profil Mahasiswa</h2>
+<div class="profil-detail-card">
+<dl>
+<div class="profil-item">
+<dt>Nama</dt>
+<dd>Muhammad Farhan Said, S.Mat.</dd>
+</div>
+<div class="profil-item">
+<dt>Asal</dt>
+<dd>Kendari, Sulawesi Tenggara</dd>
+</div>
+<div class="profil-item">
+<dt>Prodi</dt>
+<dd>Pendidikan Profesi Guru</dd>
+</div>
+<div class="profil-item">
+<dt>Universitas</dt>
+<dd>Universitas Halu Oleo</dd>
+</div>
+<div class="profil-item">
+<dt>Mapel</dt>
+<dd>Matematika</dd>
+</div>
+<div class="profil-item">
+<dt>Guru Pamong</dt>
+<dd>Dra. Mikarna Haryani, M.Pd.</dd>
+</div>
+<div class="profil-item">
+<dt>DPL</dt>
+<dd>Dr. Hafiludin Samparadja, S.Pd., M.Pd.</dd>
+</div>
+<div class="profil-item">
+<dt>Lokasi PPL</dt>
+<dd>SMA Negeri 4 Kendari</dd>
+</div>
+</dl>
+</div>
+<div class="profil-detail-card">
+<h4>Kontak</h4>
+<div class="contact-item">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          muhfarhan292@gmail.com
+        </div>
+<div class="contact-item">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
+          0853 4280 1342
+        </div>
+<div class="contact-item">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Kendari, Sulawesi Tenggara
+        </div>
+</div>
+</div>
+<div class="profil-body fade-in">
+<div class="section-label" style="margin-bottom:0.5rem;">Narasi Diri</div>
+<h2 class="section-title" style="margin-bottom:1rem;">Mengenal Diri dan Tujuan</h2>
+<div class="narasi-gallery">
+<figure class="narasi-photo">
+<a aria-label="Buka Google Maps: Daerah Asal" class="media-link" href="https://www.google.com/maps/search/?api=1&amp;query=Kendari,+Sulawesi+Tenggara" rel="noopener" target="_blank">
+<div class="narasi-photo-frame">
+<img alt="Daerah Asal" src="https://drive.google.com/thumbnail?id=1awCBl7VM_ui7c8VULJX7Tl8nNrhJYsmd&amp;sz=w1200" style="width:115%; height:115%; object-fit:fill; display:block; border-radius:4px;"/>
+</div>
+</a>
+<a class="media-caption-link" href="https://youtu.be/8pI6ZIFiNhY?si=x5UPQCPNlrxApdCx" rel="noopener" target="_blank">Kota Kendari</a>
+</figure>
+<figure class="narasi-photo">
+<a aria-label="Buka Google Maps: Lokasi LPTK" class="media-link" href="https://maps.app.goo.gl/cEwjoeNeScsWFn389" rel="noopener" target="_blank">
+<div class="narasi-photo-frame">
+<img alt="Lokasi LPTK" src="https://drive.google.com/thumbnail?id=1kSpJPg6Z7hfLZsHCYjmHRu8li1OXTHLb&amp;sz=w1200" style="width:115%; height:115%; object-fit:fill; display:block; border-radius:4px;"/>
+</div>
+</a>
+<a class="media-caption-link" href="https://youtu.be/xpkRvWk-iI0?si=116ETK5NLe8QvAi_" rel="noopener" target="_blank">Universitas Halu Oleo</a>
+</figure>
+<figure class="narasi-photo">
+<a aria-label="Buka Google Maps: Lokasi PPLT" class="media-link" href="https://maps.app.goo.gl/azWKB5WhBJdFPfSY9" rel="noopener" target="_blank">
+<div class="narasi-photo-frame">
+<img alt="Lokasi PPLT" src="https://drive.google.com/thumbnail?id=1tOdDO_odrV1_KPCb2e_quZXk3UatE9Uk&amp;sz=w1200" style="width:115%; height:115%; object-fit:fill; display:block; border-radius:4px;"/>
+</div>
+</a>
+<a class="media-caption-link" href="https://www.youtube.com/@SMANegeri4Kendari1975" rel="noopener" target="_blank">SMAN 4 Kendari</a>
+</figure>
+</div>
+<p>
+        Saya, Muhammad Farhan Said, berasal dari Kota Kendari, ibu kota Provinsi Sulawesi Tenggara, yang punya karakter khas sebagai kota pesisir di Teluk Kendari dan sejak lama dikenal sebagai jalur singgah perdagangan laut. Bagi saya, Kendari punya daya tarik yang hangat dan membanggakan. Lautnya dekat dengan kehidupan warga, suasana kotanya tumbuh dari budaya pesisir, dan identitas lokalnya terasa kuat lewat warisan seperti kain tenun khas Kendari yang bermotif indah serta kerajinan perak yang halus dan bernilai seni tinggi. Selain itu, Kendari juga menyimpan pesona wisata yang membuatnya istimewa, seperti Pantai Nambo yang terkenal dengan pasir putihnya, serta masjid bersejarah seperti Masjid Raya Al-Kautsar yang menjadi salah satu penanda penting perjalanan kota ini. Dari kota inilah saya tumbuh dengan rasa syukur, kedekatan pada budaya, dan semangat untuk terus belajar serta membawa nama baik daerah asal saya ke mana pun saya melangkah.      </p>
+<p>
+        Inspirasi saya untuk menjadi guru berawal dari pengalaman saat menjadi asisten dosen pada masa perkuliahan. Dari pengalaman tersebut, saya merasakan kebahagiaan tersendiri ketika mahasiswa dapat memahami materi yang saya jelaskan dan menunjukkan antusiasme dalam belajar. Saya juga menyadari bahwa banyak peserta didik sebenarnya memiliki potensi yang besar, tetapi sering kali mengalami kesulitan karena konsep yang dipelajari disampaikan dengan cara yang kurang mudah dipahami. Hal itulah yang mendorong saya untuk menjadi seorang guru matematika yang mampu menjembatani konsep-konsep yang abstrak menjadi lebih sederhana, dekat, dan bermakna bagi peserta didik. Ke depan, saya ingin menjadi guru profesional yang tidak hanya menguasai materi pembelajaran, tetapi juga mampu menuntun setiap peserta didik sesuai potensi dan karakteristiknya, membangun karakter yang baik, serta menjadi sosok yang terus belajar, reflektif, dan memberi teladan positif baik di dalam maupun di luar kelas.      </p>
+<p>
+        Melalui Program Pendidikan Profesi Guru (PPG) Calon Guru, saya berupaya mewujudkan cita-cita tersebut secara sistematis dan terstruktur. Bagi saya, PPG bukan sekadar ruang untuk memenuhi syarat administratif menjadi guru bersertifikat, tetapi juga menjadi proses penting dalam membentuk karakter, mempertajam kompetensi pedagogik, serta memperkuat identitas saya sebagai calon pendidik profesional. Setiap siklus pembelajaran yang saya jalani, setiap perangkat yang saya rancang, dan setiap pengalaman mengajar di kelas menjadi bagian dari perjalanan saya untuk terus belajar dan memperbaiki diri. Dari proses inilah saya semakin yakin bahwa menjadi guru bukan hanya tentang menyampaikan materi, melainkan tentang hadir dengan kesungguhan untuk menuntun peserta didik agar memahami pelajaran dengan lebih baik dan menemukan makna dalam setiap proses belajar.      </p>
+<p>
+        Dalam jangka panjang, saya ingin tumbuh menjadi pendidik yang tidak hanya menguasai materi, tetapi juga mampu merancang pengalaman belajar yang bermakna, mendorong peserta didik untuk berpikir kritis, kreatif, dan bertanggung jawab. Saya percaya bahwa setiap peserta didik membawa potensi yang unik, sebagaimana saya sendiri pernah merasakan bahwa pengalaman mengajar dapat menumbuhkan keyakinan dan semangat untuk terus berkembang sebagai calon guru. Karena itu, saya ingin menjadi guru yang hadir secara penuh, baik secara intelektual maupun emosional, bagi setiap murid yang saya dampingi. Nilai yang paling saya pegang teguh dalam menjalankan profesi ini adalah kejujuran intelektual, empati, dan pertumbuhan yang berkelanjutan, sebab saya meyakini bahwa guru yang baik adalah guru yang tidak pernah berhenti belajar. E-portofolio ini pun menjadi salah satu wujud nyata komitmen saya untuk terus bertumbuh, merefleksikan pengalaman, dan merencanakan langkah perbaikan yang lebih baik ke depannya.      </p>
+<div class="quote-block">
+<blockquote>
+          "Menjadi guru bagi saya adalah proses belajar tanpa henti untuk menuntun peserta didik memahami potensinya, mengembangkan karakternya, dan mempersiapkan dirinya menghadapi masa depan dengan percaya diri dan tanggung jawab."
+        </blockquote>
+<cite>— Refleksi Pribadi, Muhammad Farhan Said</cite>
+</div>
+</div>
+</div>
+</div>
+<section id="artefak">
+<div class="section-label">Dokumentasi Praktik</div>
+<h2 class="section-title">Kegiatan Mengajar dan Non-Mengajar</h2>
+<p class="section-lead">Bagian ini memuat dokumentasi perangkat pembelajaran, media, materi, hasil karya peserta didik, serta kegiatan non-mengajar selama PPL Mandiri di SMA Negeri 4 Kendari. Pilih kategori dan menu untuk melihat dokumentasi yang tersedia.</p>
+<div class="cycle-tabs"><button class="cycle-tab active" onclick="selectCycle('mengajar', this)" type="button">Kegiatan Mengajar</button><button class="cycle-tab" onclick="selectCycle('non-mengajar', this)" type="button">Kegiatan Non-Mengajar</button></div>
+<div class="artefak-tabs" style="display:flex;"><button class="artefak-tab active" onclick="selectType('rpp', this)" type="button">Modul Ajar</button><button class="artefak-tab" onclick="selectType('lkpd', this)" type="button">Instrumen Penilaian</button><button class="artefak-tab" onclick="selectType('media', this)" type="button">Media Pembelajaran</button><button class="artefak-tab" onclick="selectType('penilaian-ppl', this)" type="button">Materi Pembelajaran</button><button class="artefak-tab" onclick="selectType('karya', this)" type="button">Hasil Karya Siswa</button><button class="artefak-tab" onclick="selectType('dokumentasi', this)" type="button">Dokumentasi Pembelajaran</button></div><div class="nonmengajar-tabs" id="nonMengajarTabs" style="display:none;"><button class="artefak-tab active" onclick="selectNonMengajar('upacara', this)" type="button">Upacara Bendera</button><button class="artefak-tab" onclick="selectNonMengajar('rabu-sehat', this)" type="button">Rabu Sehat</button><button class="artefak-tab" onclick="selectNonMengajar('kamis-literasi', this)" type="button">Kamis Literasi</button><button class="artefak-tab" onclick="selectNonMengajar('jumat-imtaq', this)" type="button">Jum'at Imtaq</button><button class="artefak-tab" onclick="selectNonMengajar('rapat-guru', this)" type="button">Rapat Guru</button><button class="artefak-tab" onclick="selectNonMengajar('jalan-santai', this)" type="button">Jalan Santai</button></div>
+<div class="artefak-panel active" id="panel-s1-rpp">
+<div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
+</div>
+<div>
+<h3>Modul Ajar</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item">
+<h4>Konteks Artefak</h4>
+<p>Artefak ini berupa modul ajar atau Rencana Pembelajaran Mendalam (RPM) pada mata pelajaran Matematika Tingkat Lanjut kelas XII-N SMA Negeri 4 Kendari, dengan materi persamaan garis singgung lingkaran melalui titik pada lingkaran. Modul dirancang untuk satu pertemuan dengan alokasi waktu 2 JP (90 menit), menggunakan pendekatan Pembelajaran Mendalam, model Discovery Learning, dan strategi pembelajaran kooperatif. Kegiatan pembelajaran disusun agar murid dapat menemukan konsep melalui eksplorasi, diskusi kelompok, pengolahan data, verifikasi, dan penarikan kesimpulan. Namun, berdasarkan refleksi pelaksanaan, kegiatan belum terlaksana secara utuh karena murid membutuhkan waktu lebih lama dalam mengerjakan LKPD dan memahami petunjuk kegiatan.</p>
+</div>
+<div class="analysis-item b">
+<h4>Tujuan Pembuatan</h4>
+<p>Modul ajar ini dibuat sebagai pedoman pelaksanaan pembelajaran yang terarah, sistematis, dan berpusat pada murid. Tujuan utamanya adalah membantu murid memahami karakteristik garis singgung lingkaran, menemukan bentuk persamaannya, serta menentukan persamaan garis singgung melalui titik yang diketahui. Selain itu, modul dirancang untuk mengembangkan kemampuan penalaran kritis, kolaborasi, dan komunikasi matematis melalui aktivitas kelompok dan presentasi. Penyusunan modul juga bertujuan memberikan pengalaman belajar yang bermakna melalui tahapan memahami, mengaplikasi, dan merefleksi.</p>
+</div>
+<div class="analysis-item b">
+<h4>Kelebihan</h4>
+<p>Kelebihan modul ajar ini terletak pada susunan kegiatan pembelajaran yang sistematis dan memberikan kesempatan kepada murid untuk terlibat aktif dalam menemukan konsep matematika. LKPD disusun mengikuti tahapan Discovery Learning, mulai dari pemberian stimulus hingga generalisasi, sehingga murid diarahkan untuk membangun pemahaman melalui proses eksplorasi, bukan sekadar menerima rumus. Modul juga dilengkapi asesmen diagnostik, asesmen formatif, rubrik penilaian, refleksi, serta rencana pendampingan bagi murid yang membutuhkan bantuan. Selain itu, pembagian peran dalam kelompok dan penggunaan media visual, seperti gambar lingkaran serta GeoGebra sebagai pilihan, mendukung kolaborasi dan pemahaman konsep.</p>
+</div>
+<div class="analysis-item">
+<h4>Kekurangan</h4>
+<p>Kekurangan modul ajar ini terlihat dari tuntutan kegiatan LKPD yang cukup panjang dan memerlukan kemampuan prasyarat serta kemandirian belajar yang memadai. Petunjuk kegiatan, terutama pada tahap pengolahan data untuk menemukan bentuk umum persamaan garis singgung, masih berpotensi membingungkan sebagian murid sehingga membutuhkan penjelasan tambahan dari guru. Alokasi waktu yang tersedia juga relatif terbatas untuk menyelesaikan seluruh tahapan penemuan, verifikasi, generalisasi, asesmen, dan refleksi. Berdasarkan pelaksanaan, kegiatan hanya mencapai tahap Data Processing, sehingga rancangan pembelajaran belum sepenuhnya dapat diwujudkan. Hal ini menunjukkan perlunya penyederhanaan langkah LKPD, penguatan petunjuk, dan penyesuaian alokasi waktu dengan kebutuhan nyata murid.</p>
+</div>
+<div class="analysis-item">
+<h4>Kendala Penyusunan dan Implementasi</h4>
+<p>Kendala dalam penyusunan dan implementasi modul berkaitan dengan penentuan aktivitas yang sesuai dengan karakteristik murid serta perkiraan waktu yang dibutuhkan untuk setiap tahapan pembelajaran. Pada pelaksanaannya, beberapa murid memerlukan waktu lebih lama untuk memahami instruksi dan menyelesaikan LKPD, sementara guru perlu memberikan pendampingan kepada beberapa kelompok secara bersamaan. Karena pembelajaran ini merupakan pertemuan pertama dengan kelas tersebut, pemahaman guru terhadap kesiapan, kemandirian, dan kebutuhan belajar murid juga masih terbatas. Akibatnya, waktu yang direncanakan tidak mencukupi untuk melaksanakan seluruh rangkaian kegiatan. Pengalaman ini menjadi bahan refleksi untuk memperjelas instruksi LKPD, memperbaiki pengelolaan waktu, dan menyesuaikan strategi pembelajaran pada pertemuan berikutnya.</p>
+</div>
+<div class="analysis-item b">
+<h4>Faktor Keberhasilan</h4>
+<p>Faktor yang mendukung keberhasilan pembelajaran adalah adanya perencanaan yang terstruktur, penggunaan LKPD sebagai panduan kegiatan, serta keterlibatan murid melalui diskusi dan tanya jawab. Banyak murid menunjukkan keaktifan dengan mengajukan pertanyaan ketika menghadapi kesulitan, sehingga proses pembelajaran tetap berlangsung dan guru dapat mengetahui sebagian kebutuhan belajar mereka. Pendampingan guru serta masukan dari Guru Pamong juga menjadi bagian penting dalam mengevaluasi pelaksanaan pembelajaran. Meskipun seluruh tahapan belum terlaksana, pengalaman ini memberikan informasi nyata mengenai respons dan kebutuhan murid. Hasil refleksi tersebut menjadi dasar untuk memperbaiki instruksi LKPD, mengelola waktu dengan lebih efektif, dan mempertimbangkan penggunaan model Problem Based Learning (PBL) pada pertemuan berikutnya agar pembelajaran lebih sesuai dengan kondisi kelas.</p>
+</div>
+</div>
+<div class="ornament-divider"><hr/><span>Dokumen Artefak Siklus 1</span><hr/></div>
+<div class="pdf-block">
+<iframe loading="lazy" src="https://drive.google.com/file/d/1uijvmlKSd7jZE4bPioYBKBfyiTAPJSPn/preview" title="Modul Ajar Siklus 1"></iframe>
+</div>
+<div class="pdf-actions">
+<a class="pdf-button" href="https://drive.google.com/file/d/1uijvmlKSd7jZE4bPioYBKBfyiTAPJSPn/view?usp=drive_link" rel="noopener" target="_blank">Buka di Google Drive</a>
+<a class="pdf-button secondary" href="https://drive.google.com/file/d/1uijvmlKSd7jZE4bPioYBKBfyiTAPJSPn/preview" rel="noopener" target="_blank">Drive Preview</a>
+</div>
+</div>
+</div>
+</div>
+<div class="artefak-panel" id="panel-s1-lkpd">
+<div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+</div>
+<div>
+<h3>Instrumen Penilaian</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item"><h4>Konteks Artefak</h4><p>Artefak ini berupa Lembar Kerja Peserta Didik (LKPD) untuk mata pelajaran Matematika Tingkat Lanjut kelas XII-N SMA Negeri 4 Kendari, dengan materi persamaan garis singgung lingkaran melalui titik pada lingkaran. LKPD dirancang sebagai pendukung pembelajaran menggunakan model Discovery Learning melalui kegiatan diskusi kelompok. Aktivitasnya meliputi pemberian stimulus, perumusan masalah, pengumpulan dan pengolahan data, verifikasi, serta generalisasi. LKPD ini digunakan agar murid dapat menemukan konsep melalui eksplorasi dan penalaran, bukan hanya menerima rumus dari guru. Namun, berdasarkan refleksi pelaksanaan pembelajaran, pengerjaan LKPD membutuhkan waktu lebih lama dari yang direncanakan karena beberapa murid mengalami kesulitan memahami petunjuk dan mengikuti langkah-langkah kegiatan.</p></div>
+<div class="analysis-item b"><h4>Tujuan Pembuatan</h4><p>LKPD ini disusun untuk membantu murid memahami hubungan antara jari-jari lingkaran dan garis singgung, menurunkan bentuk persamaan garis singgung melalui titik pada lingkaran, serta menentukan dan memverifikasi persamaan tersebut. Melalui kegiatan yang disusun secara bertahap, murid diharapkan dapat mengembangkan kemampuan berpikir kritis, bekerja sama, dan menyampaikan hasil pemikiran secara matematis. Selain itu, LKPD bertujuan memberikan pengalaman belajar yang mendorong murid membangun pemahaman konsep secara mandiri melalui diskusi, pengamatan pola, perhitungan, dan penarikan kesimpulan.</p></div>
+<div class="analysis-item b"><h4>Kelebihan</h4><p>Kelebihan LKPD ini adalah memiliki tahapan kegiatan yang sistematis dan selaras dengan sintaks Discovery Learning, sehingga murid memperoleh kesempatan untuk membangun konsep dari hasil eksplorasi. Pertanyaan pemantik membantu mengarahkan perhatian murid pada hubungan antara jari-jari dan garis singgung, sedangkan tabel eksplorasi pada titik P(3, 4) dan Q(−3, 4) membantu murid membandingkan hasil perhitungan dan menemukan pola. LKPD juga menyediakan tahapan pengolahan data untuk menurunkan rumus secara umum, dilanjutkan dengan verifikasi menggunakan titik pada lingkaran. Susunan ini mendukung pengembangan penalaran matematis karena murid tidak hanya menghitung, tetapi juga menguji hasil dan menyimpulkan konsep.</p></div>
+<div class="analysis-item"><h4>Kekurangan</h4><p>Kekurangan LKPD ini adalah beberapa petunjuk dan langkah penyelesaian masih membutuhkan penjelasan tambahan agar dapat dipahami oleh murid dengan tingkat kesiapan belajar yang beragam. Tahap Data Processing, khususnya penurunan persamaan garis singgung dari hubungan gradien hingga diperoleh bentuk umum, memiliki tuntutan aljabar yang cukup tinggi dan berpotensi menyulitkan murid yang belum menguasai materi prasyarat. Berdasarkan refleksi pelaksanaan, sebagian murid memerlukan waktu lebih lama dan pendampingan berulang untuk menyelesaikan kegiatan, sehingga pembelajaran belum mencapai tahap verifikasi dan generalisasi. Oleh karena itu, LKPD perlu diperbaiki dengan menyederhanakan instruksi, memberikan contoh atau petunjuk antara pada langkah-langkah yang sulit, serta menyesuaikan beban kegiatan dengan alokasi waktu dan kebutuhan belajar murid.</p></div>
+</div>
+<div class="pdf-block">
+<iframe loading="lazy" src="https://drive.google.com/file/d/1T7W7spE7PLLxjfLIpfERYV0M4VxAPgSb/preview" title="Instrumen Penilaian Siklus 1"></iframe>
+</div>
+<div class="pdf-actions">
+<a class="pdf-button" href="https://drive.google.com/file/d/1T7W7spE7PLLxjfLIpfERYV0M4VxAPgSb/view?usp=drive_link" rel="noopener" target="_blank">Buka di Google Drive</a>
+<a class="pdf-button secondary" href="https://drive.google.com/file/d/1T7W7spE7PLLxjfLIpfERYV0M4VxAPgSb/preview" rel="noopener" target="_blank">Drive Preview</a>
+</div>
+</div>
+</div>
+</div>
+<div class="artefak-panel" id="panel-s1-media">
+<div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+</div>
+<div>
+<h3>Media Pembelajaran</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item"><h4>Konteks Artefak</h4><p>Artefak ini berupa media presentasi PowerPoint (PPT) untuk pembelajaran Matematika Tingkat Lanjut kelas XII-N SMA Negeri 4 Kendari, dengan materi persamaan garis singgung lingkaran melalui titik pada lingkaran. PPT disusun menggunakan pendekatan Pembelajaran Mendalam dan model Discovery Learning dengan alokasi waktu 2 JP (90 menit). Materi disajikan secara bertahap, mulai dari pengecekan prasyarat, pemberian stimulus visual, eksplorasi kelompok, penurunan rumus, verifikasi, hingga generalisasi dan refleksi. PPT ini berfungsi sebagai media pendukung untuk memperjelas alur pembelajaran dan membantu murid mengikuti aktivitas yang terdapat dalam LKPD. Namun, dalam pelaksanaannya, beberapa tahapan membutuhkan waktu lebih lama dari perkiraan sehingga seluruh rangkaian kegiatan belum dapat diselesaikan.</p></div>
+<div class="analysis-item b"><h4>Tujuan Pembuatan</h4><p>PPT ini dibuat untuk membantu guru menyampaikan materi secara terstruktur dan memudahkan murid memahami konsep persamaan garis singgung lingkaran melalui penyajian visual, pertanyaan pemantik, contoh perhitungan, dan rangkuman rumus. Selain itu, PPT bertujuan memberikan arahan mengenai tahapan kegiatan pembelajaran, memperjelas instruksi kerja kelompok, serta membantu murid menghubungkan hasil eksplorasi dengan konsep matematis yang lebih umum. PPT juga memuat contoh penerapan garis singgung dalam kehidupan sehari-hari, aspek penilaian, latihan individu, dan refleksi agar pembelajaran tidak hanya berfokus pada perhitungan, tetapi juga pada pemahaman konsep dan evaluasi pengalaman belajar.</p></div>
+<div class="analysis-item b"><h4>Kelebihan</h4><p>Kelebihan PPT ini adalah penyajian materi yang terstruktur, penggunaan ilustrasi visual untuk membedakan garis potong dan garis singgung, serta penjabaran proses penurunan rumus secara bertahap. Pembagian tahapan pembelajaran dan alokasi waktunya membantu guru mengarahkan kegiatan, sedangkan pertanyaan pemantik dan contoh soal mendorong murid untuk mengamati, berdiskusi, dan menguji pemahaman. PPT juga memuat rumus garis singgung untuk beberapa bentuk persamaan lingkaran, contoh penerapan dalam kehidupan sehari-hari, kriteria penilaian, latihan individu, serta refleksi. Dengan demikian, media ini dapat mendukung pembelajaran yang lebih terarah dan membantu murid memperoleh gambaran menyeluruh tentang materi yang dipelajari.</p></div>
+<div class="analysis-item"><h4>Kekurangan</h4><p>Kekurangan PPT ini adalah beberapa bagian materi, khususnya penurunan rumus dan penyajian bentuk umum persamaan garis singgung, membutuhkan pemahaman aljabar yang cukup kuat sehingga belum tentu mudah diikuti oleh seluruh murid hanya melalui presentasi. Meskipun alur dan alokasi waktu telah dicantumkan, pelaksanaan pembelajaran menunjukkan bahwa waktu yang tersedia belum cukup untuk menyelesaikan semua tahapan sesuai rencana, terutama karena murid membutuhkan pendampingan saat mengerjakan LKPD. Selain itu, PPT masih perlu didukung penjelasan lisan, contoh tambahan, dan pengecekan pemahaman secara berkala agar murid yang pasif atau mengalami kesulitan tidak tertinggal. Oleh karena itu, PPT dapat ditingkatkan dengan menyederhanakan penjelasan pada bagian yang kompleks, menambahkan petunjuk langkah demi langkah, serta menyesuaikan jumlah aktivitas dengan waktu dan kebutuhan belajar murid.</p></div>
+</div>
+<div class="pdf-block">
+<iframe loading="lazy" src="https://drive.google.com/file/d/1V005p0Q-2hslJB_o6ErV4BkGbtI7EGHR/preview" title="Media Pembelajaran Siklus 1"></iframe>
+</div>
+<div class="pdf-actions">
+<a class="pdf-button" href="https://drive.google.com/file/d/1V005p0Q-2hslJB_o6ErV4BkGbtI7EGHR/view?usp=drive_link" rel="noopener" target="_blank">Buka di Google Drive</a>
+<a class="pdf-button secondary" href="https://drive.google.com/file/d/1V005p0Q-2hslJB_o6ErV4BkGbtI7EGHR/preview" rel="noopener" target="_blank">Drive Preview</a>
+</div>
+</div>
+</div>
+</div>
+<div class="artefak-panel" id="panel-s1-karya">
+<div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+</div>
+<div>
+<h3>Contoh Hasil Kerja Peserta Didik</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item"><h4>Kelebihan yang Tercermin</h4><p>Hasil kerja kelompok 5 menunjukkan bahwa murid telah berusaha memahami konsep persamaan garis singgung lingkaran melalui diskusi dan penyelesaian LKPD secara bertahap. Hal ini terlihat dari kemampuan mereka mengidentifikasi hubungan antara garis singgung dan jari-jari yang saling tegak lurus, melakukan perhitungan gradien pada titik P dan Q, serta menuliskan persamaan garis singgung berdasarkan hasil perhitungan. Murid juga berusaha menghubungkan rumus yang ditemukan dengan kasus baru, yaitu titik R pada lingkaran. Hasil tersebut mencerminkan adanya upaya penalaran matematis, penerapan konsep prasyarat, dan kerja sama dalam menyelesaikan permasalahan, meskipun beberapa bagian jawaban masih belum lengkap atau belum dituliskan secara sistematis.</p></div>
+<div class="analysis-item b"><h4>Area yang Perlu Ditingkatkan</h4><p>Area yang perlu ditingkatkan adalah ketelitian perhitungan, kejelasan langkah penyelesaian, dan kemampuan menyusun generalisasi konsep secara runtut. Pada bagian pengolahan data, penurunan rumus persamaan garis singgung untuk titik umum P belum terlihat lengkap, sedangkan bagian generalisasi dan kesimpulan juga belum terisi dengan jelas. Beberapa jawaban pada tabel eksplorasi dan verifikasi masih sulit dibaca atau kurang menunjukkan alasan matematis yang mendukung hasilnya. Hal ini sejalan dengan refleksi pembelajaran sebelumnya bahwa murid membutuhkan waktu cukup lama untuk memahami petunjuk LKPD dan menyelesaikan tahapan kegiatan. Oleh karena itu, murid perlu dibimbing untuk menuliskan setiap langkah secara lebih terstruktur, memeriksa kembali hasil perhitungan, serta menjelaskan hubungan antara proses yang dilakukan dan rumus yang diperoleh. Guru juga dapat memperjelas instruksi pada bagian yang sulit dan memberikan pertanyaan pemandu agar murid lebih mudah menyelesaikan kegiatan hingga tahap kesimpulan.</p></div>
+</div>
+<div class="pdf-block">
+<iframe loading="lazy" src="https://drive.google.com/file/d/1Hu6F-mC1Bcdp5_3lZsCVtuWyyOmqjwd1/preview" title="Hasil Karya Siswa Siklus 1"></iframe>
+</div>
+<div class="pdf-actions">
+<a class="pdf-button" href="https://drive.google.com/file/d/1Hu6F-mC1Bcdp5_3lZsCVtuWyyOmqjwd1/view?usp=drive_link" rel="noopener" target="_blank">Buka di Google Drive</a>
+<a class="pdf-button secondary" href="https://drive.google.com/file/d/1Hu6F-mC1Bcdp5_3lZsCVtuWyyOmqjwd1/preview" rel="noopener" target="_blank">Drive Preview</a>
+</div>
+</div>
+</div>
+</div>
+<div class="artefak-panel" id="panel-s1-dokumentasi">
+<div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+</div>
+<div>
+<h3>Dokumentasi Pembelajaran</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item"><h4>Deskripsi Dokumentasi</h4><p>Dokumentasi ini menunjukkan kegiatan pembelajaran pada Siklus 1 di dalam kelas. Pada foto pertama dan kedua, guru terlihat berdiri di depan kelas sambil menjelaskan materi dan mengarahkan perhatian murid ke papan tulis. Sementara itu, foto ketiga memperlihatkan suasana pembelajaran dari sudut pandang yang lebih luas, dengan murid duduk di tempat masing-masing dan memperhatikan penjelasan guru. Dokumentasi ini menggambarkan pelaksanaan pembelajaran secara langsung, ketika guru menyampaikan materi serta membimbing murid selama proses belajar berlangsung.</p></div>
+<div class="analysis-item b"><h4>Refleksi</h4><p>Berdasarkan dokumentasi tersebut, saya berupaya melaksanakan pembelajaran dengan memberikan penjelasan dan arahan kepada murid agar mereka dapat memahami materi yang dipelajari. Namun, saya menyadari bahwa keberhasilan pembelajaran tidak hanya ditentukan oleh penjelasan guru, tetapi juga oleh sejauh mana murid terlibat aktif dan memahami materi. Oleh karena itu, saya perlu terus mengevaluasi pelaksanaan pembelajaran, terutama dalam mengelola waktu, menyampaikan instruksi dengan jelas, dan memberikan bimbingan sesuai kebutuhan murid. Pada pembelajaran berikutnya, saya akan berupaya meningkatkan keterlibatan murid melalui kegiatan yang lebih terarah serta memberi kesempatan kepada mereka untuk bertanya, berdiskusi, dan menyampaikan pemahamannya.</p></div>
+</div>
+<div class="documentation-gallery">
+<figure class="documentation-photo">
+<a class="media-link" href="https://drive.google.com/file/d/1I3Bbl3A4MQq5pw4orDetIsHdS1Rvx3En/view?usp=drive_link" rel="noopener" target="_blank">
+<img alt="Foto 1 dokumentasi siklus 1" src="https://drive.google.com/thumbnail?id=1I3Bbl3A4MQq5pw4orDetIsHdS1Rvx3En&amp;sz=s500"/>
+</a>
+<figcaption>Foto 1 · Siklus 1</figcaption>
+</figure>
+<figure class="documentation-photo">
+<a class="media-link" href="https://drive.google.com/file/d/1R7g3RagiMtpz0aRgtu95l40DL8yoiyQF/view?usp=drive_link" rel="noopener" target="_blank">
+<img alt="Foto 2 dokumentasi siklus 1" src="https://drive.google.com/thumbnail?id=1R7g3RagiMtpz0aRgtu95l40DL8yoiyQF&amp;sz=s500"/>
+</a>
+<figcaption>Foto 2 · Siklus 1</figcaption>
+</figure>
+<figure class="documentation-photo">
+<a class="media-link" href="https://drive.google.com/file/d/1Q5ZpU7Cebw5UWRgrm5YaQ98PqMo8J19i/view?usp=drive_link" rel="noopener" target="_blank">
+<img alt="Foto 3 dokumentasi siklus 1" src="https://drive.google.com/thumbnail?id=1Q5ZpU7Cebw5UWRgrm5YaQ98PqMo8J19i&amp;sz=s500"/>
+</a>
+<figcaption>Foto 3 · Siklus 1</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+<div class="artefak-panel" id="panel-s1-penilaian-ppl"><div class="artefak-card">
+<div class="artefak-card-header">
+<div class="artefak-icon">
+<svg fill="none" height="22" stroke="white" stroke-width="1.8" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+</div>
+<div>
+<h3>Materi Pembelajaran</h3>
+<p>Siklus 1 · Matematika</p>
+</div>
+</div>
+<div class="artefak-card-body">
+<div class="analysis-grid">
+<div class="analysis-item"><h4>Konteks Artefak</h4><p>Materi ajar ini bersumber dari buku Pelajaran Matematika 3 SMA/MA Kelas XII Tingkat Lanjut terbitan Yudhistira tahun 2025, Bab 2 Geometri Analitik, subbab Lingkaran, khususnya halaman 78–80. Materi yang digunakan berfokus pada persamaan garis singgung lingkaran, meliputi penentuan kedudukan garis terhadap lingkaran, persamaan garis singgung melalui titik pada lingkaran, serta persamaan garis singgung berdasarkan gradien. Materi dilengkapi dengan contoh soal, langkah-langkah penyelesaian, ilustrasi gambar, dan latihan diskusi untuk membantu murid memahami konsep yang dipelajari.</p></div>
+<div class="analysis-item b"><h4>Tujuan Pembuatan</h4><p>Materi ajar ini digunakan sebagai sumber belajar dan acuan dalam melaksanakan pembelajaran mengenai persamaan garis singgung lingkaran. Melalui materi ini, murid diharapkan mampu memahami hubungan antara jari-jari dan garis singgung, menentukan persamaan garis singgung melalui titik pada lingkaran, serta menyelesaikan permasalahan menggunakan langkah-langkah matematis yang tepat. Selain itu, contoh soal dan latihan diskusi dapat dimanfaatkan untuk membantu murid mengembangkan kemampuan penalaran, pemecahan masalah, dan penerapan konsep yang telah dipelajari.</p></div>
+<div class="analysis-item b"><h4>Kelebihan</h4><p>Materi ajar memiliki susunan penjelasan yang sistematis, mulai dari konsep kedudukan garis terhadap lingkaran hingga penurunan persamaan garis singgung. Contoh soal disertai langkah-langkah penyelesaian sehingga dapat membantu murid memahami proses memperoleh jawaban, bukan hanya menghafal rumus. Ilustrasi lingkaran dan garis singgung juga membantu memperjelas hubungan geometris yang dijelaskan secara matematis. Selain itu, adanya latihan diskusi memberikan kesempatan kepada murid untuk menguji pemahaman dan menerapkan konsep pada variasi soal yang berbeda.</p></div>
+<div class="analysis-item"><h4>Kekurangan</h4><p>Materi ajar cenderung menekankan penjelasan matematis, penggunaan rumus, dan manipulasi aljabar sehingga berpotensi menyulitkan murid yang belum menguasai konsep prasyarat, seperti gradien dan persamaan garis lurus. Penurunan rumus yang disajikan juga membutuhkan ketelitian dalam mengikuti setiap langkah, sedangkan ilustrasi yang tersedia belum sepenuhnya memberikan pengalaman eksplorasi secara langsung. Selain itu, pada bagian materi yang digunakan, contoh penerapan dalam kehidupan sehari-hari masih terbatas. Oleh karena itu, materi dari buku perlu didukung dengan penjelasan guru, pertanyaan penuntun, dan LKPD dengan instruksi yang jelas agar murid dapat memahami konsep secara bertahap dan tidak sekadar mengikuti prosedur penyelesaian.</p></div>
+</div>
+<div class="pdf-block">
+<iframe loading="lazy" src="https://drive.google.com/file/d/1jEW2MnmzkPkUriBjBwoveHSrH2CX7E5C/preview" title="Materi Pembelajaran Siklus 1"></iframe>
+</div>
+<div class="pdf-actions">
+<a class="pdf-button" href="https://drive.google.com/file/d/1jEW2MnmzkPkUriBjBwoveHSrH2CX7E5C/view?usp=drive_link" rel="noopener" target="_blank">Buka di Google Drive</a>
+<a class="pdf-button secondary" href="https://drive.google.com/file/d/1jEW2MnmzkPkUriBjBwoveHSrH2CX7E5C/preview" rel="noopener" target="_blank">Drive Preview</a>
+</div>
+</div>
+</div><div class="artefak-card">
+</div></div>
+
+
+<div class="nonmengajar-panel active" id="nonmengajar-upacara"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Upacara Bendera</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1NPfxV68xhDiAkKPBWpaOf_z0SAPE96Rp/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Buka foto Upacara Bendera 1 di Google Drive"><img src="https://drive.google.com/thumbnail?id=1NPfxV68xhDiAkKPBWpaOf_z0SAPE96Rp&amp;sz=w1200" alt="Dokumentasi kegiatan Upacara Bendera, foto 1" loading="lazy" decoding="async"></a></div><div class="nonmengajar-photo-slot"><a class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1STg5x-cmdiPb_cwqtqPPezrrA-rguGgt/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Buka foto Upacara Bendera 2 di Google Drive"><img src="https://drive.google.com/thumbnail?id=1STg5x-cmdiPb_cwqtqPPezrrA-rguGgt&amp;sz=w1200" alt="Dokumentasi kegiatan Upacara Bendera, foto 2" loading="lazy" decoding="async"></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti upacara bendera dalam rangka memperingati Hari Ulang Tahun ke-81 Kemerdekaan Republik Indonesia yang diselenggarakan di SMA Negeri 4 Kendari pada tanggal 17 Agustus 2026. Upacara berlangsung dengan melibatkan berbagai unsur warga sekolah dan dimeriahkan oleh penampilan marching band, pasukan pengibar bendera (Paskibra) yang terdiri atas siswa-siswi SMA Negeri 4 Kendari, serta pengibaran bendera berukuran sangat panjang. Orang tua dari para siswa yang bertugas sebagai anggota Paskibra juga hadir sebagai tamu undangan untuk menyaksikan pelaksanaan upacara. Selain itu, penampilan drama oleh peserta didik turut menambah kemeriahan kegiatan dan menyampaikan pesan mengenai nilai-nilai perjuangan serta semangat kebangsaan. Melalui kegiatan ini, saya memperoleh pengalaman dan pemahaman mengenai pentingnya menanamkan rasa nasionalisme, menghargai jasa para pahlawan, serta mengembangkan kedisiplinan, tanggung jawab, dan kebersamaan di lingkungan sekolah.</p></div></div></div></div><div class="nonmengajar-panel" id="nonmengajar-rabu-sehat"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Rabu Sehat</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Rabu Sehat 1 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/11wLuUu5VAhAiSyp8sIc0lt-2S-_8hESa/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Rabu Sehat, foto 1" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=11wLuUu5VAhAiSyp8sIc0lt-2S-_8hESa&amp;sz=w1200"/></a></div><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Rabu Sehat 2 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1YcyP4Ba95OuS3NaTkHyDk_-MKKe3tSDL/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Rabu Sehat, foto 2" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1YcyP4Ba95OuS3NaTkHyDk_-MKKe3tSDL&amp;sz=w1200"/></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti kegiatan Rabu Sehat melalui pelaksanaan Senam Anak Indonesia Hebat bersama warga sekolah. Kegiatan ini bertujuan untuk membiasakan peserta didik menerapkan pola hidup sehat, menjaga kebugaran tubuh, serta membangun semangat dan kebersamaan di lingkungan sekolah. Melalui kegiatan ini, saya memperoleh pemahaman mengenai pentingnya mendukung pembiasaan hidup sehat sebagai salah satu upaya menjaga kondisi fisik dan meningkatkan kesiapan peserta didik dalam mengikuti pembelajaran.</p></div></div></div></div><div class="nonmengajar-panel" id="nonmengajar-kamis-literasi"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Kamis Literasi</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Kamis Literasi 1 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/18iVJs3qXbEiayu8y0kKlfqz_14r4YTNS/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Kamis Literasi, foto 1" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=18iVJs3qXbEiayu8y0kKlfqz_14r4YTNS&amp;sz=w1200"/></a></div><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Kamis Literasi 2 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1J8zxPM-JqGLqXigq8VAanByatbAwZTRS/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Kamis Literasi, foto 2" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1J8zxPM-JqGLqXigq8VAanByatbAwZTRS&amp;sz=w1200"/></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti kegiatan Kamis Berliterasi yang menjadi wadah bagi peserta didik untuk menyalurkan minat, bakat, dan kreativitas melalui berbagai kegiatan, seperti menyanyi, menari, dan membaca buku. Dalam pelaksanaannya, guru turut mengawasi dan mendampingi peserta didik agar kegiatan berjalan dengan tertib. Kegiatan ini memberikan kesempatan kepada peserta didik untuk mengekspresikan diri, mengembangkan potensi, serta meningkatkan rasa percaya diri. Selain itu, saya semakin memahami bahwa pengembangan potensi peserta didik perlu didukung tidak hanya melalui pembelajaran di kelas, tetapi juga melalui kegiatan positif di lingkungan sekolah.</p></div></div></div></div><div class="nonmengajar-panel" id="nonmengajar-jumat-imtaq"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Jum'at Imtaq</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Jum'at Imtaq 1 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1k4RHmatFio8ya4fo2Sb5z_CPGsSlRgeR/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Jum'at Imtaq, foto 1" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1k4RHmatFio8ya4fo2Sb5z_CPGsSlRgeR&amp;sz=w1200"/></a></div><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Jum'at Imtaq 2 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1vA_8Jkt6h7CwHHiu5d3KUPd5sK4Ah5Jp/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Jum'at Imtaq, foto 2" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1vA_8Jkt6h7CwHHiu5d3KUPd5sK4Ah5Jp&amp;sz=w1200"/></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti kegiatan Jumat Imtak yang dilaksanakan setiap Jumat pagi melalui kegiatan mendengarkan kultum singkat dan murattal yang dibawakan oleh peserta didik maupun guru agama. Kegiatan ini menjadi salah satu bentuk pembiasaan untuk menanamkan nilai-nilai keagamaan, memperkuat karakter religius, serta membangun sikap dan perilaku yang baik dalam kehidupan sehari-hari. Melalui kegiatan ini, saya memperoleh pemahaman bahwa pembentukan karakter peserta didik perlu diimbangi dengan pembinaan spiritual agar mereka dapat tumbuh menjadi pribadi yang berakhlak baik dan memiliki nilai-nilai moral yang kuat.</p></div></div></div></div><div class="nonmengajar-panel" id="nonmengajar-rapat-guru"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Rapat Guru</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Rapat Guru 1 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1CItlcqihtPeA_XxdDHDzhrz2ast-qk-p/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Rapat Guru, foto 1" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1CItlcqihtPeA_XxdDHDzhrz2ast-qk-p&amp;sz=w1200"/></a></div><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Rapat Guru 2 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1fCHzg1Kln3-vlAZ252lvd0mBPjj75jf0/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Rapat Guru, foto 2" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1fCHzg1Kln3-vlAZ252lvd0mBPjj75jf0&amp;sz=w1200"/></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti rapat guru yang membahas berbagai hal terkait pengelolaan dan pengembangan sekolah, mulai dari pengelolaan fasilitas, pembentukan karakter peserta didik, hingga upaya mendukung peningkatan mutu pendidikan. Kegiatan ini memberikan gambaran mengenai peran penting komunikasi dan koordinasi antarpendidik dalam menjalankan program sekolah. Melalui kegiatan tersebut, saya memahami bahwa kerja sama, kolaborasi, dan pengambilan keputusan secara bersama-sama diperlukan untuk menciptakan lingkungan sekolah yang tertib, nyaman, serta mendukung penyelenggaraan pembelajaran yang berkualitas.</p></div></div></div></div><div class="nonmengajar-panel" id="nonmengajar-jalan-santai"><div class="artefak-card"><div class="artefak-card-header"><div class="artefak-icon"><svg aria-hidden="true" fill="none" height="22" stroke="white" stroke-width="1.7" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></div><div><h3>Jalan Santai</h3><p>Dokumentasi Kegiatan Non-Mengajar</p></div></div><div class="artefak-card-body"><div class="nonmengajar-photo-grid"><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Jalan Santai 1 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1kPVz5bbMpKHNMV-nBiYt9Jy5ZOp9HWoR/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Jalan Santai, foto 1" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1kPVz5bbMpKHNMV-nBiYt9Jy5ZOp9HWoR&amp;sz=w1200"/></a></div><div class="nonmengajar-photo-slot"><a aria-label="Buka foto Jalan Santai 2 di Google Drive" class="nonmengajar-photo-link" href="https://drive.google.com/file/d/1xXarkDBPOjfYDzkVpOIVpUvRFoWhhfBj/view?usp=sharing" rel="noopener noreferrer" target="_blank"><img alt="Dokumentasi kegiatan Jalan Santai, foto 2" decoding="async" loading="lazy" src="https://drive.google.com/thumbnail?id=1xXarkDBPOjfYDzkVpOIVpUvRFoWhhfBj&amp;sz=w1200"/></a></div></div><div class="nonmengajar-description"><h4>Penjelasan Kegiatan</h4><p>Mengikuti kegiatan jalan santai dan Pekan Olahraga Guru yang diselenggarakan oleh Dinas Pendidikan dan Kebudayaan Provinsi Sulawesi Tenggara pada tanggal 20 Agustus 2026. Kegiatan ini menjadi sarana untuk menjaga kesehatan dan kebugaran jasmani sekaligus mempererat hubungan sosial di antara para guru. Selain menumbuhkan semangat kebersamaan dan sportivitas, kegiatan ini juga memberikan pengalaman mengenai pentingnya menjaga keseimbangan antara aktivitas profesional dan kesehatan fisik. Saya menyadari bahwa hubungan yang baik antarp guru merupakan salah satu hal yang dapat mendukung terjalinnya kolaborasi dalam lingkungan pendidikan.</p></div></div></div></div></section>
+<footer>
+<div>
+    © 2026 Muhammad Farhan Said
+  </div>
+<div style="text-align:center; color:rgba(249,245,239,0.3);">
+    Universitas Halu Oleo · Pendidikan Profesi Guru
+  </div>
+<div>
+    Dibimbing oleh <a href="#">Dra. Mikarna Haryani, M.Pd.</a> &amp; <a href="#">Dr. Hafiludin Samparadja, S.Pd., M.Pd.</a>
+</div>
+</footer>
+<script>
+  // Filter state for the two main categories and their submenus.
+  let currentCycle = 'mengajar';
+  let currentType = 'rpp';
+  let currentNonMengajar = 'upacara';
+
+  function selectCycle(cycle, btn) {
+    currentCycle = cycle;
+    document.querySelectorAll('.cycle-tab').forEach(t => t.classList.toggle('active', t === btn));
+    const teachingTabs = document.querySelector('.artefak-tabs');
+    const nonTeachingTabs = document.querySelector('.nonmengajar-tabs');
+    if (teachingTabs) teachingTabs.style.display = cycle === 'mengajar' ? 'flex' : 'none';
+    if (nonTeachingTabs) nonTeachingTabs.style.display = cycle === 'non-mengajar' ? 'flex' : 'none';
+    updateArtefakPanels();
+  }
+
+  function selectType(type, btn) {
+    currentType = type;
+    document.querySelectorAll('.artefak-tabs .artefak-tab').forEach(t => t.classList.toggle('active', t === btn));
+    updateArtefakPanels();
+  }
+
+  function selectNonMengajar(type, btn) {
+    currentNonMengajar = type;
+    document.querySelectorAll('.nonmengajar-tabs .artefak-tab').forEach(t => t.classList.toggle('active', t === btn));
+    updateArtefakPanels();
+  }
+
+  function updateArtefakPanels() {
+    document.querySelectorAll('.artefak-panel').forEach(panel => {
+      panel.classList.toggle('active', currentCycle === 'mengajar' && panel.id.endsWith('-' + currentType));
+    });
+    document.querySelectorAll('.nonmengajar-panel').forEach(panel => {
+      panel.classList.toggle('active', currentCycle === 'non-mengajar' && panel.id === 'nonmengajar-' + currentNonMengajar);
+    });
+  }
+
+  updateArtefakPanels();
+
+  // PPL gallery viewer
+  const ppltThumbs = document.querySelectorAll('.pplt-thumb');
+  const ppltMainImg = document.getElementById('ppltMainImg');
+  const ppltMainLink = document.getElementById('ppltMainLink');
+  const ppltMainTitle = document.getElementById('ppltMainTitle');
+  const ppltMainCaption = document.getElementById('ppltMainCaption');
+
+  function setPpltGallery(button) {
+    if (!button) return;
+    const full = button.dataset.full;
+    const thumb = button.dataset.thumb;
+    const title = button.dataset.title || 'Foto';
+    const alt = button.dataset.alt || title;
+
+    if (ppltMainImg && thumb) {
+      ppltMainImg.src = thumb;
+      ppltMainImg.alt = alt;
+    }
+    if (ppltMainLink && full) {
+      ppltMainLink.href = full;
+    }
+    if (ppltMainTitle) ppltMainTitle.textContent = title;
+    if (ppltMainCaption) ppltMainCaption.textContent = alt;
+
+    ppltThumbs.forEach(t => t.classList.toggle('active', t === button));
+  }
+
+  ppltThumbs.forEach(btn => {
+    btn.addEventListener('click', () => setPpltGallery(btn));
+  });
+
+  if (ppltThumbs.length) {
+    setPpltGallery(ppltThumbs[0]);
+  }
+
+  // Navigation scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('nav a[data-section]');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.section === entry.target.id);
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Scroll reveal for elements
+  const revealEls = document.querySelectorAll('.fade-in');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    revealObserver.observe(el);
+  });
+</script>
+</body>
+</html>
